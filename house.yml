@@ -1,4 +1,5 @@
 ---
 build:
+    local: true
     commands:
-    - go build github.com/ishiikurisu/owdb
+    - rails test
