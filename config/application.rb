@@ -1,6 +1,7 @@
 require_relative 'boot'
 require_relative '../app/models/spreadsheet'
 require 'rails/all'
+require 'pathname'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -17,4 +18,6 @@ module OWDB
   end
 end
 
-$spreadsheet = Spreadsheet.new './config/secrets.json'
+secret_file = Pathname.new(ENV['HOME']) + 'secrets.json'
+`curl -L -o #{secret_file.to_s} #{ENV['DRIVE_SECRET']}` unless secret_file.exist?
+$spreadsheet = Spreadsheet.new secret_file.to_s
