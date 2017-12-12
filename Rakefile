@@ -4,3 +4,10 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task :default => [:tdd]
+
+desc "Runs unit tests"
+task :tdd do
+    puts `ruby ./test/models/test_spreadsheet.rb`
+end
