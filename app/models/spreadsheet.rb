@@ -12,11 +12,15 @@ class Spreadsheet
     end
 
     def get_team_ids
-        @teamsheet[1..-1].map { |e| e[0] }
+        @teamsheet[1..-1].map { |e| e[0].to_i }
     end
 
     def get_players_from_team_id id
         team_id_field = @playersheet[0].index 'time_id'
         @playersheet[1..-1].select { |player| player[team_id_field] == id }
+    end
+
+    def get_team_name_by_id id
+        @teamsheet[id][1]
     end
 end

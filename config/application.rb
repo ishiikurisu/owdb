@@ -1,4 +1,5 @@
 require_relative 'boot'
+require_relative '../app/models/spreadsheet'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -16,5 +17,4 @@ module OWDB
   end
 end
 
-# TODO Implement spreadsheet
-$spreadsheet = nil
+$spreadsheet = Spreadsheet.new './config/secrets.json'
