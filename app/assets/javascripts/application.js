@@ -18,7 +18,8 @@ function drawAboutTeamById(id) {
     var selectedItems = document.getElementsByClassName('email-item-selected');
     var currentSelected = document.getElementById('team-item-' + id);
     if (selectedItems.length > 0) {
-        for (var item of selectedItems) {
+        for (var i = 0; i < selectedItems.length; ++i) {
+            var item = selectedItems[i];
             item.classList.remove('email-item-selected');
         }
     }
