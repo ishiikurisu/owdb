@@ -4,8 +4,28 @@ class MainController < ApplicationController
     end
 
     def get_team_info
-        team_id = request['id']
-        team_info = $spreadsheet.get_team_info team_id.to_i
+        # TODO Move all this HTML to an actual HTML file
+        team_id = request['id'].to_i
+        team_info = $spreadsheet.get_team_info team_id
+        players = $spreadsheet.get_players_from_team_id(team_id).map{ |id| $spreadsheet.get_player_info id }
+        players_info = <<-END
+            <div class="pure-u">
+                <p>Nenhum jogador registrado!</p>
+            </div>
+        END
+
+        if players.length > 0
+            players_info = players.inject('') do |box, player|
+                box + <<-END
+                    <div class="pure-u">
+                        <h1>#{player['nome']} (#{player['nick']})</h1>
+                        <ul>
+                            <li>Esteve na copa do mundo? Não</li>
+                        </ul>
+                    </div>
+                END
+            end
+        end
 
         render inline: <<-END
         <div class="email-content-header pure-g">
@@ -17,10 +37,8 @@ class MainController < ApplicationController
             </div>
         </div>
 
-        <div class="email-content-body">
-            <p>
-                TODO Add players info here.
-            </p>
+        <div class="email-content-body pure-g">
+            #{players_info}
         </div>
         END
     end

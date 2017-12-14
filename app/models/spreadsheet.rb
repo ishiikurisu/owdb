@@ -17,7 +17,7 @@ class Spreadsheet
 
     def get_players_from_team_id id
         team_id_field = @playersheet[0].index 'time_id'
-        @playersheet[1..-1].select { |player| player[team_id_field] == id }
+        @playersheet[1..-1].select{ |player| player[team_id_field].to_i == id }.map{ |player| player[0].to_i }
     end
 
     def get_team_name_by_id id
@@ -29,6 +29,17 @@ class Spreadsheet
         available = @teamsheet[0]
 
         @teamsheet[id].each_with_index do |it, i|
+            info[available[i]] = it
+        end
+
+        return info
+    end
+
+    def get_player_info id
+        info = { }
+        available = @playersheet[0]
+
+        @playersheet[id].each_with_index do |it, i|
             info[available[i]] = it
         end
 
