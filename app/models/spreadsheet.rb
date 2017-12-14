@@ -23,4 +23,15 @@ class Spreadsheet
     def get_team_name_by_id id
         @teamsheet[id][1]
     end
+
+    def get_team_info id
+        info = { }
+        available = @teamsheet[0]
+
+        @teamsheet[id].each_with_index do |it, i|
+            info[available[i]] = it
+        end
+
+        return info
+    end
 end

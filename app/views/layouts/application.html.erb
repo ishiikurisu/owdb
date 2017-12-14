@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>OWDB</title>
-    <%= csrf_meta_tags %>
+    <head>
+        <title>OWDB</title>
+        <%= csrf_meta_tags %>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <body>
+        <div id="layout" class="content pure-g">
+            <div id="nav" class="pure-u">
+                <a href="#" class="nav-menu-button">Menu</a>
 
-  <body>
-    <%= yield %>
-  </body>
+                <div class="nav-inner">
+                    <div class="pure-menu">
+                        <ul class="pure-menu-list">
+                            <li class="pure-menu-item"><a href="/" class="pure-menu-link">Teams</a></li>
+                            <li class="pure-menu-item"><a href="/main/about" class="pure-menu-link">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <%= yield %>
+        </div>
+
+        <!-- SCRIPTS -->
+    </body>
 </html>
