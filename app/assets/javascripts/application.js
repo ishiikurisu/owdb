@@ -13,3 +13,27 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+function drawAboutTeamById(id) {
+    // Selecting current div
+    var selectedItems = document.getElementsByClassName('email-item-selected');
+    var currentSelected = document.getElementById('team-item-' + id);
+    if (selectedItems.length > 0) {
+        for (var item of selectedItems) {
+            item.classList.remove('email-item-selected');
+        }
+    }
+    currentSelected.classList.add('email-item-selected');
+
+    // Drawing team content
+    $.ajax({
+        'url' : 'main/team',
+        'type' : 'GET',
+        'data' : {
+            'id' : id
+        },
+        'success' : function(data) {
+            var teamContent = document.getElementById('content');
+            teamContent.innerHTML = data;
+        }
+    });
+}
